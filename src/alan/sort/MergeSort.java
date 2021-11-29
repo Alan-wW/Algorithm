@@ -22,34 +22,33 @@ public class MergeSort {
         return nums;
     }
     public static void sort(int[] nums,int start,int end){
-        if(end <= start){
+        if(start >= end){
             return;
         }
         int mid = start + (end - start) / 2;
-
         sort(nums,start,mid);
         sort(nums,mid + 1,end);
         merge(nums,start,mid,end);
     }
 
     private static void merge(int[] nums, int start, int mid, int end) {
+        int left = start;
+        int right = mid + 1;
         int p = start;
-        int p1 = start;
-        int p2 = mid + 1;
-
-        while(p1 <= mid && p2 <= end){
-            if(nums[p1] < nums[p2]){
-                tem[p++] = nums[p1++];
+        while(left <= mid && right <= end){
+            if(GenerateUtils.AisLessB(nums,left,right)){
+                tem[p++] = nums[left++];
             }else{
-                tem[p++] = nums[p2++];
+                tem[p++] = nums[right++];
             }
         }
-        while(p1 <= mid){
-            tem[p++] = nums[p1++];
+        while(left <= mid){
+            tem[p++] = nums[left++];
         }
-        while(p2 <= end){
-            tem[p++] = nums[p2++];
+        while (right <= end){
+            tem[p++] = nums[right++];
         }
+
         for(int i = start;i <= end;i++){
             nums[i] = tem[i];
         }

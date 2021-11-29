@@ -21,7 +21,7 @@ public class QuickSort {
         return nums;
     }
     public static void sort(int[] nums,int lo,int hi){
-        if(hi <= lo){
+        if(lo >= hi){
             return;
         }
         int pat = pattion(nums,lo,hi);
@@ -29,30 +29,27 @@ public class QuickSort {
         sort(nums,pat + 1,hi);
     }
     public static int pattion(int[] nums,int lo,int hi){
-        if(hi <= lo){
-            return lo;
-        }
+        int pat = nums[lo];
         int left = lo;
         int right = hi + 1;
-        int min = lo;
-        while(true){
-            while(nums[--right] > nums[min]){
+        while (true){
+            while (nums[--right] > pat){
                 if(right == lo){
                     break;
                 }
             }
-            while(nums[++left] < nums[min]){
+            while (nums[++left] < pat){
                 if(left == hi){
                     break;
                 }
             }
             if(left >= right){
                 break;
-            }else{
+            }else {
                 GenerateUtils.exch(nums,left,right);
             }
         }
-        GenerateUtils.exch(nums,min, right);
+        GenerateUtils.exch(nums,right,lo);
         return right;
     }
 }
